@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background-color: dodgerblue;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            var btn01 = document.getElementById("btn01");
+            var box1 = document.getElementById("box1");
+            btn01.onclick = function () {
+                //alert(box1.style.width);       //读取内联样式，也可以用来赋值，css里内联样式的优先级高
+
+                //alert(box1.currentStyle.width);  //ie这样写
+
+
+                //alert(getComputedStyle(box1,null).width);  //ie9以上和其他浏览器
+                /* 这个方法需要2个参数，元素名和伪元素（没有就是null，一般都是null）
+                这个方法返回的是一个对象，后面点上样式名就有了
+                对于没有设置的样式，他不返回默认值而是当前具体值 */
+
+                alert(getStyle(box1, "backgroundColor"));
+            };
+
+            function getStyle(obj, name) {
+                if (window.getComputedStyle) {
+                    return getComputedStyle(obj, null)[name];
+                }
+                else {
+                    return obj.currentStyle[name];
+                }
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <button id="btn01">来点我呀</button>
+    <br><br>
+    <div id="box1"></div>
+</body>
+
+</html>

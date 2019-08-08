@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /*图片是宽750，高500的，外层div的宽是图片的宽度加图片的左右间距（20px），即750+20*2=790px*/
+        #outer {
+            width: 790px;
+            height: 500px;
+            margin: 100px auto;
+            background-color: aquamarine;
+            padding: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* #imglist{
+            position: absolute;
+        } */
+        #imglist li {
+            float: left;
+            margin: auto 20px;
+        }
+
+        /* 设置导航按钮 */
+        #navdiv {
+            position: absolute;
+            float: left;
+            bottom: 40px;
+            /* outer 790px
+            a 总共（20+10*2）*6 = 240px
+            navdiv 的位置 （790-240）/2 = 275px*/
+            /* left: 275px; */
+
+        }
+
+        #navdiv a {
+            /* display: block;     无需变成块元素，直接浮动内联元素就会变成块元素 */
+            float: left;
+            width: 20px;
+            height: 20px;
+            margin: auto 10px;
+
+            background-color: crimson;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            /* 设置透明度 */
+            /* 常规浏览器 */
+            opacity: 0.5;
+            /* ie8浏览器 */
+            filter: alpha(opacity=50);
+        }
+
+        /* 设置鼠标移入的效果 */
+        #navdiv a:hover {
+            background-color: black;
+        }
+    </style>
+    <script src="tools.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            var outer = document.getElementById("outer");
+            var imglist = document.getElementById("imglist");
+            var imgarr = document.getElementsByTagName("img");
+            var li = document.getElementsByTagName("li")[0];
+
+            var navdiv = document.getElementById("navdiv");
+            var aarr = document.getElementsByTagName("a");
+
+            // 设置导航按钮默认选中样式
+            var index = 0;
+            aarr[index].style.backgroundColor = "black";
+
+            //设置轮播图ul宽度
+            carouselcss(outer, imglist, imgarr, li, 750);
+            //设置导航按钮居中
+            navdivleft(outer, navdiv);
+
+            for (var i = 0; i < aarr.length; i++) {
+                //为每一个超链接添加一个num属性，记录序号作为索引
+                aarr[i].num = i;
+                //为超链接绑定单机响应函数
+                aarr[i].onclick = function () {
+                    clearInterval(timer);
+                    //获取点击链接的索引
+                    index = this.num;
+
+                    //修改选中的a
+                    setA();
+                    //切换图片
+                    picmove(imglist, 50, (0 - parseInt(getStyle(outer, "width")) * index), "left", function () {
+                        autoChange();
+                    });
+                };
+            }
+
+            //自动切换图片
+            autoChange();
+
+            //定义一个点击按钮改变选中按钮样式的函数
+            function setA() {
+                //遍历所有的a并将他们的颜色变为未选中的颜色
+                for (var i = 0; i < aarr.length; i++) {
+                    aarr[i].style.backgroundColor = "";
+                    //这里给空串是为了去掉黑色让它执行css中的默认样式，不然会因为优先级覆盖掉hover的样式，内联样式>id选择器>伪类和类
+                }
+                aarr[index].style.backgroundColor = "black";
+            }
+
+            //定义一个定时器标识，方便在点击时停止自动轮播
+            var timer;
+            //创建一个函数开启自动轮播
+            function autoChange() {
+                timer = setInterval(function () {
+                    index++;
+                    index %= imgarr.length;
+                    picmove(imglist, 20, (0 - parseInt(getStyle(outer, "width")) * index), "left", function () {
+                        if(index==imgarr.length-1)
+                        {
+                            imglist.style.left = "0px";
+                            index = 0;
+                            
+                        }
+                        setA();
+                        console.log(index);
+                    });
+                }, 3000);
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <div id="outer">
+        <ul id="imglist">
+            <li>
+                <img src="pic/11.jpg" alt="11.jpg">
+            </li>
+            <li>
+                <img src="pic/12.jpg" alt="12.jpg">
+            </li>
+            <li>
+                <img src="pic/13.jpg" alt="13.jpg">
+            </li>
+            <li>
+                <img src="pic/14.jpg" alt="14.jpg">
+            </li>
+            <li>
+                <img src="pic/15.jpg" alt="15.jpg">
+            </li>
+            <li>
+                <img src="pic/16.jpg" alt="16.jpg">
+            </li>
+            <li>
+                <img src="pic/11.jpg" alt="11.jpg">
+            </li>
+        </ul>
+        <!-- 创建导航按钮 -->
+        <div id="navdiv">
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+        </div>
+    </div>
+</body>
+
+</html>

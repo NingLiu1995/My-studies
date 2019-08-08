@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        var i = 1;
+        /* window.setInterval(function(){
+            console.log(i++);
+        },3000); */
+
+        //这个叫延时调用，指定时间后执行一次
+        var timer = window.setTimeout(function(){
+            console.log(i++);
+        },3000);
+
+        window.clearTimeout(timer);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

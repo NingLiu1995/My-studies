@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript">
+        
+        window.onload = function(){
+            var allA = document.getElementsByTagName("a");
+            var btn1 = document.getElementById("btn1");
+            
+            /*var a_click = function(){
+                alert(this.parentNode.childNodes[0].textContent);
+            };*/
+
+            /*for(let i = 0;i<allA.length;i++)
+            {
+                allA[i].onclick = a_click;
+            }*/
+
+            //利用事件的冒泡，绑定他们共有的父元素节点来触发单击响应函数，这样无需为原有的和新增的动态的元素分别添加单击响应函数
+            //这里知识点event的 target属性，即 “返回触发此事件的元素（事件的目标节点）”。
+            var ul = document.getElementById("ul");
+            ul.onclick = function(event){
+                event = event || window.event;
+                if(event.target.className=="link")
+                {
+                    alert(event.target.textContent);
+                }
+                console.log(event);
+            };
+
+
+            btn1.onclick = function(){
+                var li = document.createElement("li");
+                var a = document.createElement("a");
+                a.href = "javascript:;";
+                a.className = "link";
+                a.textContent = "超链接" + (allA.length+1);
+                li.appendChild(a)
+                var ul = document.getElementById("ul");
+                ul.appendChild(li);
+                //重点在这里，新加的节点要重新绑定，它没有跟着onload一起
+                //a.onclick = a_click;
+            }
+             
+        };
+    </script>
+</head>
+<body>
+    <button id="btn1">添加超链接</button>
+    <ul id="ul" style="background-color: bisque">
+        <li><a href="javascript:;" class="link">超链接1</a></li>
+        <li><a href="javascript:;" class="link">超链接2</a></li>
+        <li><a href="javascript:;" class="link">超链接3</a></li>
+    </ul>
+</body>
+</html>

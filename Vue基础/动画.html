@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        .act-enter-active{
+            animation: bounce-in 1s;
+        }
+        .act-leave-active{
+            animation: bounce-in 1s reverse;
+        }
+        @keyframes bounce-in{
+            0%{
+                transform: scale(0);
+            }
+            50%{
+                transform: scale(1.5);
+            }
+            100%{
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="demo">
+        <button @click="isShow=!isShow">Toggle show</button><br>
+        <transition name="act" mode="">
+            <P v-show="isShow" style="display: inline-block">Lorem ipsum dolor sit amet.</P>
+        </transition> 
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue" type="text/javascript"></script>
+    <script type="text/javascript">
+        new Vue({
+            el:'#demo',
+            data(){
+                return{
+                    isShow:true,
+                }
+            }
+        })
+    </script>
+</body>
+</html>

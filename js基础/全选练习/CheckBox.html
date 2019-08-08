@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta content="text/html ;charset=UTF-8">
+		<title>全选练习</title>
+		<style type="text/css">
+			#main{
+				text-align:center;
+				margin:300px;
+			}
+		</style>		
+		<script type="text/javascript">
+			window.onload=function(){
+				//全选按钮
+				var btn01 = document.getElementById("checkedAllBtn");
+				var cb = document.getElementsByName("items");
+				btn01.onclick=function(){
+					//console.log(cb01.length);
+					for(var i=0;i<cb.length;i++){
+						cb[i].checked=true;
+					}
+					cball.checked=true;
+				};
+				//全不选按钮
+				var btn02 = document.getElementById("checkedNoBtn");
+				btn02.onclick=function(){
+					for(var i=0;i<cb.length;i++){
+						cb[i].checked=false;
+					}
+					cball.checked=false;
+				};
+				//反选按钮
+				var btn03 = document.getElementById("checkedRevBtn");
+				btn03.onclick=function(){
+					for(var i=0;i<cb.length;i++){
+						cb[i].checked = !cb[i].checked;
+					}
+					//cball.checked=!cball.checked;
+					alldo.checked=true;
+					for(var j=0;j<cb.length;j++){
+						if(!cb[j].checked){
+							alldo.checked=false;
+							break;
+						}
+					}
+				};
+				//提交按钮
+				var btn04 = document.getElementById("sendBtn");
+				btn04.onclick=function(){
+					for(var i=0;i<cb.length;i++){
+						if(cb[i].checked){
+							alert(cb[i].value);
+						}
+					}
+				};
+				//全选框
+				var cball = document.getElementById("alldo");
+				cball.onclick=function(){
+					for(var i=0;i<cb.length;i++){
+						cb[i].checked=this.checked;
+					}
+				};
+				//全选框同步
+				for(var i=0;i<cb.length;i++){
+					cb[i].onclick=function(){
+						alldo.checked=true;
+						for(var j=0;j<cb.length;j++){
+							if(!cb[j].checked){
+								alldo.checked=false;
+								break;
+							}
+						}
+					}
+				}
+			};
+		</script>
+	</head>
+	<body>
+		<div id="main">
+			<form method="post" action="">
+				你爱好的运动是？<input type="checkbox" id="alldo"/>全选/全不选<br/>
+				<input type="checkbox" name="items" value="足球"/>足球
+				<input type="checkbox" name="items" value="篮球"/>篮球
+				<input type="checkbox" name="items" value="羽毛球"/>羽毛球
+				<input type="checkbox" name="items" value="兵乓球"/>兵乓球<br/>
+				<input type="button" id="checkedAllBtn" value="全 选"/>
+				<input type="button" id="checkedNoBtn" value="全不选"/>
+				<input type="button" id="checkedRevBtn" value="反 选"/>
+				<input type="button" id="sendBtn" value="提交"/>	
+			</form>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo">
+        姓：<input type="text" placeholder="First name" v-model="firstName"><br>
+        名：<input type="text" placeholder="Last name" v-model="lastName"><br>
+        姓名1（单向）：<input type="text" placeholder="Full Name1" v-model="fullName1">通过计算属性改变,无法影响上面<br>
+        姓名2（单向）：<input type="text" placeholder="Full Name2" v-model="fullName2">通过监视属性改变,无法影响上面<br>
+        姓名3（双向）：<input type="text" placeholder="Full Name3" v-model="fullName3">用计算属性get方法和set方法回调函数双向改变<br>
+    </div>
+    <script src="C:\Users\L\node_modules\_vue@2.6.10@vue\dist\vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#demo',
+            data: {
+                firstName: 'A',
+                lastName: 'B',
+                //fullName1: 'A B', //没有调用，无需定义，计算属性中有返回值直接显示，而且还是初始化时就执行了
+                //简单来说就是写了计算属性就不用在data中定义了
+                fullName2: 'A B'
+            },
+            computed: {//初始化时执行
+                //计算属性存在缓存，多次调用只执行一次，后几次靠缓存
+                fullName1() {
+                    return this.firstName + " " + this.lastName;
+                },
+                fullName3: {
+                    //回调函数
+                    //1.自己定义的。2.没有主动调用。3.但最终执行了。
+                    //当需要读取当前属性值的时候回调，根据相关的数据计算并返回当前属性的值
+                    get() {
+                        return this.firstName + " " + this.lastName;
+                    },
+                    //回调函数，当属性值发生改变的时候回调，更新相关的属性数据
+                    set(value) {
+                        const name = value.split(' ')
+                        this.firstName = name[0];
+                        this.lastName = name[1];
+                    }
+                }
+            },
+            watch: {
+                //这是监视的一种方法，配置监视
+                firstName: function (newValue) {
+                    this.fullName2 = newValue + " " + this.lastName;
+                    console.log(this);
+                },
+                //这里用另一种方法监视lastName,所以注释掉
+                /* lastName: function (newValue) {
+                    this.fullName2 = this.firstName + " " + newValue;
+                } */
+            }
+        })
+
+        vm.$watch('lastName', function (newValue) {
+            this.fullName2 = this.firstName + " " + newValue;
+        })
+    </script>
+</body>
+
+</html>

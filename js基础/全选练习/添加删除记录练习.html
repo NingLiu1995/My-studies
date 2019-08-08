@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta content="text/html ;charset=UTF-8">
+		<title>添加删除记录练习</title>
+		<style type="text/css">
+			table{
+				background-color: aquamarine;
+				border-top-left-radius: 1em;
+				border-bottom-right-radius: 1em;
+			}
+			tr{
+				background-color: aquamarine;
+				border-top-left-radius: 1em;
+				border-bottom-right-radius: 1em;
+			}
+			th{
+				background-color: aquamarine;
+				border-top-left-radius: 1em;
+				border-bottom-right-radius: 1em;
+			}
+			td{
+				background-color: aquamarine;
+				border-top-left-radius: 1em;
+				border-bottom-right-radius: 1em;
+			}
+			input{
+				background-color: aquamarine;
+				border-top-left-radius: 1em;
+				border-bottom-right-radius: 1em;
+			}
+		</style>		
+		<script type="text/javascript">
+			window.onload=function(){
+				
+				var delA = function(){
+					var tof = confirm("确认删除" + this.parentNode.parentNode.getElementsByTagName("td")[0].innerText + "吗？");
+					/*var tr = this.parentNode.parentNode;
+					tr.parentNode.removeChild(tr);*/
+					if(tof)
+					{
+						this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
+					}
+					//因为删除有一个超链接，它会默认跳转，return false可以改变它的默认行为
+					return false;
+				}
+					
+				/*
+					删除员工
+				*/
+				//获取删除链接的标签名
+				var allA = document.getElementsByTagName("a");
+				//为每个链接都绑定一个响应函数
+				for(var i=0;i<allA.length;i++)
+				{
+					allA[i].onclick = delA;
+				}
+				
+				/*
+					添加员工
+				*/
+				//获取按钮，为按钮添加单击响应事件
+				var btn01 = document.getElementById("addEmpButton");
+				btn01.onclick = function(){
+					var _name = document.getElementById("empName").value;
+					var _email = document.getElementById("email").value;
+					var _salary = document.getElementById("Salary").value;
+					var _table = document.getElementById("employeeTable").getElementsByTagName("tr");
+					
+					var _tr = document.createElement("tr");
+					var _tdName = document.createTextNode(_name);
+					var _tdEma = document.createTextNode(_email);
+					var _tdSal = document.createTextNode(_salary);
+					var _a = document.createElement("a");
+					_a.href = "javascript:;";
+					
+					for(var j = 0;j<4;j++)
+					{
+						_tr.appendChild(document.createElement("td"));
+						if(j==0)
+						{
+							_tr.getElementsByTagName("td")[j].appendChild(_tdName);
+						}
+						else if(j==1)
+						{
+							_tr.getElementsByTagName("td")[j].appendChild(_tdEma);
+						}
+						else if(j==2)
+						{
+							_tr.getElementsByTagName("td")[j].appendChild(_tdSal);
+						}
+						else if(j==3)
+						{
+							_tr.getElementsByTagName("td")[j].appendChild(_a);
+							var _del = document.createTextNode("Delete");
+							_a.appendChild(_del);
+						}
+					}
+					document.getElementById("employeeTable").getElementsByTagName("tbody")[0].appendChild(_tr);
+					//提交后就置空
+					document.getElementById("empName").value = "";
+					document.getElementById("email").value = "";
+					document.getElementById("Salary").value = "";
+					_a.onclick = delA;
+				};
+			};
+		</script>
+	</head>
+	<body>
+		<table id="employeeTable" align="center" style="margin:100px auto" border="3px">
+			<tr>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Salary</th>
+				<th>&nbsp;</th>
+			</tr>
+			<tr>
+				<td>Tom</td>
+				<td>Tom@tom.com</td>
+				<td>5000</td>
+				<td><a href="deleteEmp?id=001">Delete</td>
+			</tr>
+			<tr>
+				<td>Mike</td>
+				<td>Mike@mike.com</td>
+				<td>9000</td>
+				<td><a href="deleteEmp?id=002">Delete</td>
+			</tr>
+			<tr>
+				<td>Peter</td>
+				<td>Peter@peter.com</td>
+				<td>6000</td>
+				<td><a href="deleteEmp?id=003">Delete</td>
+			</tr>
+			<tr>
+				<td>Jerry</td>
+				<td>Jerry@jerry.com</td>
+				<td>7000</td>
+				<td><a href="deleteEmp?id=004">Delete</td>
+			</tr>
+		</table>
+		<div id="formDiv" align="center">
+			<h4>添加新员工</h4>
+			<table align="center" style="margin:1px auto" border="3px">
+				<tr>
+					<td class="word">name: </td>
+					<td class="inp">
+						<input type="text" name="empName" id="empName"/>
+					</td>
+				</tr>
+				<tr>
+					<td class="word">email: </td>
+					<td class="inp">
+						<input type="text" name="email" id="email"/>
+					</td>
+				</tr>
+				<tr>
+					<td class="word">Salary: </td>
+					<td class="inp">
+						<input type="text" name="Salary" id="Salary"/>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">
+						<button id="addEmpButton" value="abc">
+							Submit
+						</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

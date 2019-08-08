@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        #demo {
+            width: 400px;
+            height: 400px;
+            margin: 100px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 使用v-model(数据双向绑定) 自动收集数据
+    text/textarea
+    checkbox
+    radio
+    select
+    -->
+    <div id="demo">
+        <form action="/XXX" @submit.prevent="handleSubmit">
+            <span>用户名：</span>
+            <input type="text" v-model="username"><br>
+
+            <span>密码：</span>
+            <input type="text" v-model="pwd"><br>
+
+            <span>性别：</span>
+            <input type="radio" id="female" value="女" v-model="sex">
+            <label for="female">女</label>
+            <input type="radio" id="male" value="男" v-model="sex">
+            <label for="male">男</label><br>
+
+            <span>爱好：</span>
+            <input type="checkbox" id="basket" value="basket" v-model="likes">
+            <label for="basket">篮球</label>
+            <input type="checkbox" id="foot" value="foot" v-model="likes">
+            <label for="checkbox">足球</label>
+            <input type="checkbox" id="tabletennis" value="tabletennis" v-model="likes">
+            <label for="checkbox">乒乓</label><br>
+
+            <span>城市</span>
+            <select v-model="cityId">
+                <option value="">未选择</option>
+                <option :value="city.id" v-for="(city,index) in allCities" :key="index">{{city.name}}</option>
+            </select><br>
+
+            <span>介绍</span>
+            <textarea rows="10" v-model="desc"></textarea><br><br>
+
+            <input type="submit" value="注册">
+        </form>
+    </div>
+    <script src="C:\Users\L\node_modules\_vue@2.6.10@vue\dist\vue.js"></script>
+    <script>
+        new Vue({
+            el: '#demo',
+            data: {
+                username: '',
+                pwd: '',
+                sex: '女',//这里的值要在input(radio)设定的value中选择
+                likes: ['foot'],//同理，这里也是根据value设定的值来设定默认选项
+                allCities: [{ id: 1, name: 'BJ' }, { id: 2, name: 'TJ' }, { id: 3, name: 'HB' }],
+                cityId: '1',
+                desc: '',
+            },
+            methods: {
+                handleSubmit() {
+                    console.log(this.username, this.pwd, this.sex, this.likes, this.cityId, this.desc);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

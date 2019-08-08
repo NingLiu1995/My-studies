@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo">
+        <h2>1.绑定监听</h2>
+        <button @click="test1">test1</button>
+        <button @click="test2('abcd')">test2</button>
+        <!-- 事件方法有默认的event参数，和原生js一样 -->
+        <button @click="test3">test3</button>
+        <!-- 如果需要传其他参数，$event就不能省略 -->
+        <button @click="test4('1234',$event)">test4</button>
+
+        <h2>2.事件修饰符</h2>
+        <div style="width:200px;height:200px;background:red" @click="test5">
+            <!-- 加个.stop就停止事件冒泡 -->
+            <div style="width:100px;height:100px;background:blue" @click.stop="test6"></div>
+        </div>
+        <a href="http://www.baidu.com" @click.prevent="test7">test7</a>
+
+        <h2>3.按键修饰符</h2>
+        <input type="text" @keyup.13="test8">
+        <!-- <input type="text" @keyup.enter="test8"> -->
+    </div>
+    <script src="C:\Users\L\node_modules\_vue@2.6.10@vue\dist\vue.js"></script>
+    <script>
+        new Vue({
+            el: '#demo',
+            data: {
+                test1() {
+                    alert("test1");
+                },
+                test2(msg) {
+                    alert(msg);
+                },
+                test3(event) {
+                    alert(event.target.innerHTML);
+                },
+                test4(number, event) {
+                    alert(number + "----" + event.target.innerHTML);
+                },
+                test5() {
+                    alert("out");
+                },
+                test6() {
+                    //window.event? window.event.cancelBubble = true : event.stopPropagation();
+                    //原生js这样写，前者为ie,后者为其他
+                    alert("inner");
+                },
+                test7() {
+                    //event.preventDefault();
+                    alert("点击了");
+                },
+                test8() {
+                    //event.keyCode === 13 && alert(event.target.value + " " + event.keyCode);
+                    alert(event.target.value + " " + event.keyCode);
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta content="text/html";charset="utf-8">
+		<title></title>
+		<style type = "text/css">
+			#div1{
+				border-top-left-radius:2rem;
+				border-bottom-right-radius:2rem;
+				background-color:LightGoldenRodYellow ;
+				width:200px;
+				height:200px;
+			}
+			
+			#span1{
+				background-color:lightpink;
+			}
+			
+			body{
+				background-color:LavenderBlush;
+			}
+		</style>
+		<script type="text/javascript">
+			//事件的冒泡就是事件的向上传导，当后代元素的事件被触发时，祖先元素的相同事件也会被触发
+			window.onload=function(){
+				var s1 = document.getElementById("span1");
+				var d1 = document.getElementById("div1");
+				s1.onclick=function(e){
+					alert("我是span的单击响应函数");
+					
+					//取消冒泡
+					e = e ||window.e;
+					e.cancelBubble = true;
+				};
+				d1.onclick=function(){
+					alert("我是div的单击响应函数");
+				};
+				document.body.onclick=function(){
+					alert("我是body的单击响应函数");
+				};
+			};
+		</script>
+	</head>
+	<body>
+		<div id="div1">
+			我是div1
+			<span id="span1">我是一个span</span>
+		</div>
+	</body>
+</html>

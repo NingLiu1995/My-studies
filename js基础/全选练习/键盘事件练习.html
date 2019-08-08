@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: aquamarine;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function(){
+            //键盘事件我们一般都绑定给可以获取焦点的元素，例如：input
+            //一般为表单或者document
+            var arr = [];
+            document.onkeydown = function(event){
+                //alert("按键被按下")
+                //按下不松手会一直触发，当onkeydown连续触发时，第一次和第二次中间会有小的停顿，之后全连续，这种设计是防止我们误操作
+                event = event || window.event;
+                //keycode可以判断那个按键被按下
+                if(event.keyCode === 65 /*&& event.ctrlKey*/)
+                {
+                    
+                    //console.log("a被按下");
+                }
+                console.log(event.keyCode);
+            };
+            document.onkeyup = function(){
+                //console.log("按键抬起");
+                //onkeyup不会连续触发
+            };
+        };
+    </script>
+</head>
+<body>
+    <div id="box1"></div>
+    <!-- <input type="text"> -->
+</body>
+</html>

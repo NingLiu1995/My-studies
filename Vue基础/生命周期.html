@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 三个阶段：
+        初始化显示   
+            截止到mounted()后  双大括号表达式，比如重复多个一样的，
+            实际上是在内存中重复，界面上是批量处理，减少更新的次数
+            mount就是在内存中编译好之后，挂载到界面上。
+            这一阶段，一般mounted()用的较多，created()较少。
+        更新显示
+            截止到updated()之后。
+        死亡
+            页面一样显示，只是“vm”是一个死亡状态，即没有数据绑定。
+     -->
+     <!-- 
+         常用的生命周期的方法
+         created()/mounted()    发送ajax请求，启动定时器等异步任务
+         beforeDestroy()        做收尾工作，如:清除定时器
+      -->
+    <div id="demo">
+        <button @click="destroyVM()">destroy vue</button>
+        <p v-show="isShow">I love coding</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue" type="text/javascript"></script>
+    <script type="text/javascript">
+        new Vue({
+            el: '#demo',
+            data: {
+                isShow: true,
+            },
+            //初始化阶段
+            beforeCreate () {//代表将要
+                console.log("beforeCreate ()");
+            },
+            created () {//代表已经
+                console.log("created ()");
+            },
+            beforeMount () {
+                console.log("beforeMount ()");
+            },
+            mounted() {//初始化显示之后立即调用，只调用一次
+                console.log("mounted()");
+                this.timer = setInterval(() => {
+                    console.log("--------------------");
+                    //$destroy()这个方法确实干掉了VM但定时器没有停止，这个叫内存泄露
+                    this.isShow = !this.isShow;
+                }, 1000);
+            },
+            //更新阶段
+            beforeUpdate () {
+                console.log("beforeUpdate ()");
+            },
+            updated () {
+                console.log("updated ()");
+            },
+            //死亡阶段
+            beforeDestroy() {//死亡之前调用，只调用一次
+                console.log("beforeDestroy()");
+                //清除定时器
+                clearInterval(this.timer);
+            },
+            destroyed () {
+                console.log("destroyed ()");
+            },
+            //-----------------------------------------------------
+            methods: {
+                //干掉vm
+                destroyVM() {
+                    this.$destroy();
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

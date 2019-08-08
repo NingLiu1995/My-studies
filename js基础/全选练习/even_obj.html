@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta content="text/html ;charset=UTF-8">
+		<title>事件对象练习</title>
+		<style type="text/css">
+			#main{
+				width:300px;
+				background-color:Aquamarine ;
+				border-top-left-radius:1em;
+				border-bottom-right-radius:1em;
+				height:50px;
+				border:2px solid CadetBlue  ;
+			}
+			#showMassage{
+				width:300px;
+				margin-top:10px;
+				background-color:Aquamarine ;
+				border-top-left-radius:1em;
+				border-bottom-right-radius:1em;
+				height:20px;
+				border:2px solid CadetBlue  ;
+			}
+		</style>		
+		<script type="text/javascript">
+			window.onclick=function(){
+				var mainDiv = document.getElementById("main");
+				var showMassage = document.getElementById("showMassage");
+				mainDiv.onmousemove = function(aevent){
+					//mainDiv.style.backgroundColor = "DeepPink" ;
+					//alert(aevent.clientX);
+					showMassage.innerHTML="X=" + aevent.clientX + "&nbsp&nbsp Y=" + aevent.clientY;
+				}
+				
+			};
+		</script>
+	</head>
+	<body>
+		<div id="main"></div>
+		<div id="showMassage"></div>
+	</body>
+</html>

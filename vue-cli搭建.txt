@@ -1,0 +1,6 @@
+第一步
+安装node   https://www.runoob.com/nodejs/nodejs-install-setup.html
+第二步
+安装淘宝镜像 https://www.runoob.com/nodejs/nodejs-npm.html
+第三步
+安装vue.js和vue-cli  https://www.runoob.com/vue2/vue-install.html

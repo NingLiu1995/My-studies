@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript">
+        /*
+            BOM
+            它可以使我们通过js操纵浏览器
+            BOM对象
+                Window
+                    代表浏览器的窗口，同时也是网页的全局对象。
+                Navigator
+                    代表当前浏览器的信息，通过该对象能识别不同的浏览器。
+                Location
+                    代表浏览器的地址栏信息，通过Location可以获取地址栏信息，或者操纵浏览器跳转页面。
+                History
+                    代表浏览器的历史记录，通过该对象操纵浏览器历史记录，由于隐私的原因，该对象不能获取具体的历史记录，只能操作浏览器向前或向后翻页，
+                    而且该操作只在当次访问时有效。
+                Screen
+                    代表用户屏幕的信息，通过该对象显示用户显示器的相关信息，PC用的不多
+
+                这些对象在浏览器中都是通过window对象的属性保存的，可以通过window对象使用，也可以直接使用，他们是全局变量
+        */
+        //userAgent就是一个字符串，这个字符串包含有描述浏览器信息的内容，不同的浏览器有不同的userAgent。
+        //console.log(navigator.userAgent);
+        var uagent = navigator.userAgent.toLowerCase();
+        //ie还不支持es6
+        /*if(uagent.includes("firefox"))
+        {
+            console.log("火狐浏览器");            
+        }
+        else if(uagent.includes("chrome"))
+        {
+            console.log("谷歌浏览器");            
+        }*/
+        if(/msie/i.test(uagent))
+        {
+            console.log("ie浏览器");            
+        }
+        else if(/firefox/i.test(uagent))
+        {
+            console.log("火狐浏览器");
+        }
+        else if(/chrome/i.test(uagent))
+        {
+            console.log("谷歌浏览器");
+        }
+        else if("ActiveXObject" in window)  //ie特有
+        {
+            console.log("edge");
+        }
+        //console.log(window);
+
+        /*********************************************************************************************************/
+
+        //history.length可以获取当前访问的链接数量，浏览了几个页面就是几，关闭浏览器就重新计数
+        /*back()
+            方法，和浏览器的回退一样
+        forward()
+            方法，和浏览器的前进一样
+        go()
+            方法，用来跳转到指定页面
+            正整数，前进几个页面，同forward()
+            负整数，后退几个页面，同back()
+        */
+
+
+        /*********************************************************************************************************/
+
+        /*location
+            封装了浏览器地址栏的信息*/
+        window.onload = function(){
+            var btn = document.getElementById("btn");
+            var btn01 = document.getElementById("btn01");
+            var btn02 = document.getElementById("btn02");
+            btn.onclick = function(){
+                alert(location);      //获取当前页面的完整路径
+            };
+            btn01.onclick = function(){
+                //location = "https://www.bilibili.com/video/av57849131?from=search&seid=12999480909835080537";
+                location.assign("http://www.baidu.com");
+            };
+            btn02.onclick = function(){
+                location.reload(true);
+            };
+        };
+
+        /*
+            assign()
+                直接跳转到某页面，和修改location效果一样,有历史记录
+            reload()
+                效果同刷新按钮
+                参数true，强制刷新
+            replace()
+                跳转到指定页面，没有历史记录，即无法后退
+        */
+    </script>
+</head>
+<body>
+    <button id="btn">看看location</button>
+    <button id="btn01">宏颜获水</button>
+    <button id="btn02">刷新</button>
+    <input type="text">
+</body>
+</html>

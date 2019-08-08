@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background-color: aquamarine;
+            position: absolute;
+            left:0;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var btn = document.getElementById("btn");
+            var box1 = document.getElementById("box1");
+            var speed = 10;
+            var timer;
+            btn.onmousedown = function () {
+                
+                //console.log(box1.offsetLeft);
+                timer = window.setInterval(function () {
+                    var oldvalue = parseInt(getStyle(box1,"left"));      //去掉单位px
+                    box1.style.left = oldvalue + speed + "px";
+                }, 30);
+            };
+            btn.onmouseup = function(){
+                window.clearInterval(timer);
+            };
+            function getStyle(obj, name) {
+                if (window.getComputedStyle) {
+                    return getComputedStyle(obj, null)[name];
+                }
+                else {
+                    return obj.currentStyle[name];
+                }
+            }
+            //console.log(oldvalue);
+        };
+
+    </script>
+</head>
+
+<body>
+    <button id="btn">点击按钮box向右移动</button>
+    <br><br>
+    <div id="box1"></div>
+</body>
+
+</html>

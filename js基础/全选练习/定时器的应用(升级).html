@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background-color: aquamarine;
+            position: absolute;
+            left: 0;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var btn1 = document.getElementById("btn1");
+            var btn2 = document.getElementById("btn2");
+            var box1 = document.getElementById("box1");
+            //var speed = 10;
+            var timer1;
+            var timer2;
+
+
+            /*btn1.onmousedown = function () {
+
+                //console.log(box1.offsetLeft);
+                timer1 = window.setInterval(function () {
+                    var oldvalue = parseInt(getStyle(box1, "left"));      //去掉单位px
+                    box1.style.left = oldvalue + speed + "px";
+                }, 30);
+            };
+            btn1.onmouseup = function () {
+                window.clearInterval(timer1);
+            };
+            btn2.onmousedown = function(){
+                timer2 = window.setInterval(function () {
+                    var oldvalue = parseInt(getStyle(box1, "left"));      //去掉单位px
+                    box1.style.left = oldvalue - speed + "px";
+                }, 30);
+            };
+            btn2.onmouseup = function () {
+                window.clearInterval(timer2);
+            };*/
+
+
+            function boxmove(obj, speed, btn) {
+                btn.onmousedown = function () {
+
+                    //console.log(box1.offsetLeft);
+                    timer1 = window.setInterval(function () {
+                        var oldvalue = parseInt(getStyle(obj, "left"));      //去掉单位px
+                        obj.style.left = oldvalue + speed + "px";
+                    }, 30);
+                };
+                btn.onmouseup = function () {
+                    window.clearInterval(timer1);
+                };
+            }
+
+            boxmove(box1,10,btn1);
+            boxmove(box1,-10,btn2);
+
+            function getStyle(obj, name) {
+                if (window.getComputedStyle) {
+                    return getComputedStyle(obj, null)[name];
+                }
+                else {
+                    return obj.currentStyle[name];
+                }
+            }
+            //console.log(oldvalue);
+        };
+
+    </script>
+</head>
+
+<body>
+    <button id="btn1">点击按钮box向→移动</button>
+    <button id="btn2">点击按钮box向←移动</button>
+    <br><br>
+    <div id="box1"></div>
+</body>
+
+</html>

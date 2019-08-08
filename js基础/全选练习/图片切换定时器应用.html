@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        #img {
+            display: block;
+            margin: 100px auto;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            var img = document.getElementById("img");
+            var j = 2;
+            var i ;
+            var btn01 = document.getElementById("btn01");
+            var btn02 = document.getElementById("btn02");
+            btn01.onclick = function () {
+                window.clearInterval(i);       //防止重复点击
+                i = window.setInterval(function () {
+                    img.src = img.src.replace(/\d+\.jpg/g, j.toString() + ".jpg");
+                    j = j % 4;
+                    j++;
+                }, 1000);
+                //i = i != 0 ? 1 : i;
+            };
+            btn02.onclick = function () {
+                window.clearInterval(i);
+                //clearInterval可以接受undefined
+            };
+        };
+    </script>
+</head>
+
+<body>
+    <img src="pic/1.jpg" alt="" id="img">
+    <button id="btn01">开始</button>
+    <button id="btn02">停止</button>
+    <!-- <img src="pic/2.jpg" alt="" id="img2">
+    <img src="pic/3.jpg" alt="" id="img3">
+    <img src="pic/4.jpg" alt="" id="img4"> -->
+</body>
+
+</html>

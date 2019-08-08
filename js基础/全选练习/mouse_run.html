@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta content="text/html";charset="UTF-8">
+		<title>鼠标跟随练习</title>
+		<style type="text/css">
+			#div1{
+				width:100px;
+				height:100px;
+				background-color:DarkSalmon ;
+				border:2px solid red;
+				border-top-left-radius:1em;
+				border-bottom-right-radius:1em;
+				
+				position:absolute;
+			}
+			
+			body{
+				height:1000px;
+				width:5000px;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload=function(){
+				var div1 = document.getElementById("div1");
+				document.onmousemove=function(e){
+					e = e || window.e;
+
+					//获取滚动条滚动的距离
+					var st = document.documentElement.scrollTop;
+					var sl = document.documentElement.scrollLeft;
+					
+					//console.log(st);
+					
+					/*clientX和clientY表示可视窗口的坐标*/
+					/*div1.style.left = e.clientX+"px";
+					div1.style.top = e.clientY+"px";*/
+					
+					//无需兼容IE8的方案
+					/*div1.style.left = e.pageX+"px";
+					div1.style.top = e.pageY+"px";*/
+					
+					div1.style.left = e.clientX+sl+"px";
+					div1.style.top = e.clientY+st+"px";
+					
+				}
+			}
+			
+			
+		</script>
+	</head>
+	<body>
+		<div id="div1"></div>
+	</body>
+</html>

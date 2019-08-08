@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background-color: bisque;
+            position: absolute;
+        }
+
+        /* body {
+            height: 2000px;
+        } */
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            var box1 = document.getElementById("box1");
+
+
+            if (!box1.attachEvent) {
+                box1.onmousewheel = function (event) {
+                    event = event || window.event;
+                    var bar = event.deltaY;
+                    if (event.deltaY) {
+                        if (event.deltaY > 0) {
+                            //alert("向下滚");
+                            box1.style.height = box1.clientHeight + 10 + "px";
+                        }
+                        else {
+                            //alert("向上滚");
+                            box1.style.height = box1.clientHeight > 10 ? box1.clientHeight - 10 + "px" : box1.style.height;
+                        }
+                    }
+                    else if(event.wheelDelta)
+                    {
+                        if (event.wheelDelta < 0) {
+                            //alert("向下滚");
+                            box1.style.height = box1.clientHeight + 10 + "px";
+                        }
+                        else {
+                            //alert("向上滚");
+                            box1.style.height = box1.clientHeight > 10 ? box1.clientHeight - 10 + "px" : box1.style.height;
+                        }
+                    }
+                    //console.log(event.wheelDelta);
+                    return false;
+                };
+            }
+            else if (box1.attachEvent) {
+                //console.log(event.type);        //可以用这个属性测试触发的事件
+                box1.attachEvent("onmousewheel", function (event) {
+                    event = event || window.event;
+
+                    //console.log(event.wheelDelta);
+                    if (event.wheelDelta < 0) {
+                        //alert("向下滚")
+                        box1.style.height = box1.clientHeight + 10 + "px";
+                    }
+                    else {
+                        //alert("向上滚")
+                        box1.style.height = box1.clientHeight > 10 ? box1.clientHeight - 10 + "px" : box1.style.height;
+                    }
+                    return false;
+                })
+            }
+            /*box1.onmousewheel = function(){alert("2")};*/
+            //console.log(!box1.attachEvent);
+        };
+    </script>
+</head>
+
+<body>
+    <div id="box1"></div>
+</body>
+
+</html>

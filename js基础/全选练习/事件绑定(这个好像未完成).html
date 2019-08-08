@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            var btn01 = document.getElementById("btn01");
+
+            //这种方式如果想要绑定多个事件都只会被最后一个覆盖
+            /* btn01.onclick = function(){
+                alert("这是我的效果");
+            }; */
+
+            //这里知识点addEventListener()用这种方式添加绑定事件
+            /*参数：
+                事件的字符串，如onclick，应写成“click”
+                回调函数
+                是否在捕获阶段触发事件，一般为false
+                执行顺序与绑定顺序相同
+            */
+            var fun01 = function () {
+                alert("这是我的效果1");
+            };
+            var fun02 = function () {
+                alert("这是我的效果2");
+            };
+            btn01.addEventListener("click", fun01, false);
+            btn01.addEventListener("click", fun02, false);
+
+            //ie8用attachEvent()
+            /*参数：
+                事件的字符串，要on
+                回调函数
+                执行顺序与绑定顺序相反
+            */
+            //btn01.attachEvent("onclick",fun01);
+
+            //要兼容他们可以创建一个方法
+            /*
+                addEventListener中的this是绑定事件的对象
+                attachEvent中的this是window
+             */
+            // var btnbind = function(obj,eventstr,callback){
+            //     eventstr.contains()
+            //     obj.addEventListener(eventstr,callback,false);
+            //     obj.attachEvent(eventstr)
+            // };
+        };
+    </script>
+</head>
+
+<body>
+    <button id="btn01">点我</button>
+</body>
+
+</html>

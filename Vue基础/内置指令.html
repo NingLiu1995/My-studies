@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        [v-cloak]{
+            display: none;
+        }
+        /* 指令解析后，指令属性会消失，css样式就失效，进而页面里显示出来 */
+    </style>
+</head>
+<body>
+    <div id="demo">
+        <!-- <h1>常用的内置指令</h1>
+        <h2>v-text</h2>
+        <p>更新元素的textContent</p>
+        <h2>v-html</h2>
+        <p>更新元素的innerHTML,与上面的区别就是不会显示HTML标签只显示标签内容</p>
+        <h2>v-if</h2>
+        <p>给这个指令一个true值，则绑定的标签会显示</p>
+        <h2>v-else</h2>
+        <p>与v-if配合使用</p>
+        <h2>v-show</h2>
+        <p>只是简单地切换元素的 CSS 属性 display</p>
+        <p>如果需要非常频繁地切换，则使用 v-show 较好；如果在运行时条件很少改变，则使用 v-if 较好。</p>
+        <h2>v-for</h2>
+        <p>灵活的将对象/数组显示出来</p>
+        <h2>v-on</h2>
+        <p>绑定事件监听，简写为@</p>
+        <h2>v-bind</h2>
+        <p>可理解为绑定元素属性，简写为：</p>
+        <h2>v-model</h2>
+        <p>双向数据绑定，多用在input</p>
+        <h2>ref</h2>
+        <p>为某个元素注册一个唯一标识，vue对象通过$els属性访问这个元素对象</p>
+        <h2>v-cloak</h2>
+        <p>防止在网速慢的情况下闪现表达式，与css配合：[v-cloak]{display:none}</p>
+        <br><br> -->
+        <p ref="content">这是文字</p>
+        <button @click="hint">提示</button>
+        <br><br>
+        <p v-cloak>{{msg}}</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue" type="text/javascript"></script>
+    <script type="text/javascript">
+        alert('~~~~~');
+        new Vue({
+            el:'#demo',
+            data () {
+                return {
+                    msg:'这是另一段文字',
+                }
+            },
+            methods: {
+                hint(){
+                    alert(this.$refs.content.textContent);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

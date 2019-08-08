@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        h1{
+            background-color: aquamarine;
+            margin: 150px auto;
+            font-family: fantasy;
+            text-align: center;
+            color: bisque;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            var h1 = document.getElementById("count").innerText;
+            //console.log(typeof(parseInt(h1)));
+            //console.log(i); 
+            var i = parseInt(h1);
+            var j = window.setInterval(function () {
+                document.getElementById("count").innerText = (i += 1).toString();
+                if(i == 10)
+                {
+                    window.clearInterval(j);           //setInterval()是有返回值的，相当于返回计时器的id，clearInterval()可通过计时器返回值关闭计时器
+                }              
+            }, 1000);
+        };
+    </script>
+</head>
+
+<body>
+    <h1 id="count">1</h1>
+</body>
+
+</html>

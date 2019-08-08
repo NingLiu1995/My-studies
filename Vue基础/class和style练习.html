@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        .aClass {
+            color: rgb(218, 23, 39);
+        }
+
+        .bClass {
+            color: rgb(98, 22, 199);
+        }
+
+        .cClass {
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="demo">
+        <h2>1.class绑定 :class="XXX"</h2>
+        <p class="cClass" :class="a">看看效果(字符串)</p>//普通的，通过vue的data属性赋值变量显示效果
+        <p :class="{aClass:isA,bClass:isB}">看看效果(对象)</p>//将类名为key,布尔类型数据为value作为对象来控制哪个css类名起作用
+        <p :class="['aClass','cClass']">看看效果(数组)</p>//将需要起作用的css类名作为数组元素（这种实际生产用的不多）
+        <h2>2.style绑定</h2>
+        <p :style="{color:activeColor,fontSize:fontSize + 'px'}">看看效果</p>
+        <button @click="update">更新</button>
+    </div>
+    <script src="C:\Users\L\node_modules\_vue@2.6.10@vue\dist\vue.js"></script>
+    <script>
+        new Vue({
+            el: '#demo',
+            data: {
+                a: 'aClass',
+                c: 'cClass',
+                isA: true,
+                isB: false,
+                activeColor: 'green',
+                fontSize: 40,
+            },
+            methods: {
+                update() {
+                    this.a = 'bClass';
+                    this.isA = false;
+                    this.isB = true;
+                    this.activeColor = 'orange';
+                    this.fontSize = 20;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

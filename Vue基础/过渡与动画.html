@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        /* 第一个的过渡效果 */
+        /* 显示/隐藏的过渡效果 */
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: opacity 1s;
+        }
+        /* 隐藏时的样式 */
+        .fade-enter,
+        .fade-leave-to {
+            opacity: 0;
+        }
+
+        /* 第二个的过渡效果 */
+        /* 显示的过渡效果 */
+        .move-enter-active{
+            transition: all 1s;
+        }
+        /* 隐藏的过渡效果 */
+        .move-leave-active{
+            transition: all 3s;
+        }
+        /* 隐藏时的样式 */
+        .move-enter,
+        .move-leave-to {
+            opacity: 0;
+            transform: translateX(20px);   /* 水平移动 */
+        }
+    </style>
+</head>
+
+<body>
+    <!--
+        1.在目标元素外包裹《transition name="XXX">
+        2.定义class样式
+            (1)指定过度样式transition
+            (2)指定隐藏时的样式opacity/其他
+     -->
+    <div id="demo1">
+        <button @click="isShow=!isShow">Toggle1</button>
+        <transition name="fade" mode="">
+            <p v-show="isShow">hello</p>
+        </transition>
+    </div>
+
+    <div id="demo2">
+        <button @click="isShow=!isShow">Toggle1</button>
+        <transition name="move" mode="">
+            <p v-show="isShow">hello</p>
+        </transition>
+    </div>
+    <!-- <script src="C:\Users\L\node_modules\_vue@2.6.10@vue\dist\vue.js" type="text/javascript"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue" type="text/javascript"></script>
+    <script type="text/javascript">
+        new Vue({
+            el: '#demo1',
+            data() {
+                return {
+                    isShow:true,
+                }
+            }
+        })
+
+        new Vue({
+            el: '#demo2',
+            data(){
+                return {
+                    isShow:true,
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

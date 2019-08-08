@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background-color: aquamarine;
+            position: absolute;
+            left: 0;
+        }
+        #box2 {
+            width: 100px;
+            height: 100px;
+            background-color:cadetblue;
+            position: absolute;
+            left: 0;
+            top: 200px;
+        }
+    </style>
+    <script src="tools.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            var btn01 = document.getElementById("btn01");
+            var btn02 = document.getElementById("btn02");
+            var btn03 = document.getElementById("btn03");
+            var btn04 = document.getElementById("btn04");
+            var box1 = document.getElementById("box1");
+            var box2 = document.getElementById("box2");
+            //var timer;
+            btn01.onclick = function () {
+                picmove(box1, 10, 800,"left");
+            };
+            btn02.onclick = function () {
+                picmove(box1, 10, 0,"left");
+            };
+            btn03.onclick = function(){
+                picmove(box2,20,800,"left");
+            };
+            btn04.onclick = function(){
+                picmove(box2,20,800,"width",function(){
+                    box2.style.backgroundColor = "red";
+                });
+            };
+
+        };
+    </script>
+    <!-- <script src="tools.js"></script> -->
+</head>
+
+<body>
+    <button id="btn01">向右移动</button>
+    <button id="btn02">向左移动</button>
+    <button id="btn03">下面div向右移动</button>
+    <button id="btn04">多种动画测试</button>
+    <br><br>
+    <div id="box1"></div>
+    <div id="box2"></div>
+</body>
+
+</html>

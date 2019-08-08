@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 需求：自定义两个指令
+         功能类似于v-text
+         一个实现转换为全大写 v-upper-text
+         一个实现转换为全小写 v-lower-text
+    -->
+    <div id="demo1">
+        <p v-upper-text="msg1"></p>
+        <p v-lower-text="msg1"></p>
+    </div>
+    <p>-----------------------------------------------------</p>
+    <div id="demo2">
+            <p v-upper-text="msg2"></p>
+            <p v-lower-text="msg2"></p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue" type="text/javascript"></script>
+    <script type="text/javascript">
+        //定义全局指令
+        //el:指令属性所在标签对象
+        //binding:包含指令相关信息的对象
+        Vue.directive('upper-text',function(el,binding){
+            el.innerHTML=binding.value.toUpperCase();
+            console.log(el,binding);
+        })
+        new Vue({
+            el:'#demo1',
+            data () {
+                return {
+                    msg1:'I LOVE CODING',
+                }
+            },
+            directives: {
+                'lower-text':function(el,binding){
+                    el.innerHTML=binding.value.toLowerCase();
+                }
+            }
+        })
+
+        new Vue({
+            el:'#demo2',
+            data () {
+                return {
+                    msg2:'just do it',
+                }
+            },
+            directives: {//注册局部指令，只在当前vue实例对象有效
+                'lower-text':function(el,binding){
+                    el.innerHTML=binding.value.toLowerCase();
+                }
+            }
+        })
+    </script>
+</body>
+</html>
